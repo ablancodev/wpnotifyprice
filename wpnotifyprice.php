@@ -52,6 +52,10 @@ class WPNotifyPrice_Plugin {
                 
         register_activation_hook( WPNOTIFYPRICE_FILE, array( __CLASS__, 'activate' ) );
         
+        // Ajax
+        add_action( 'wp_ajax_custom_action', array( __CLASS__, 'custom_action' ) );
+        add_action( 'wp_ajax_nopriv_custom_action', array( __CLASS__, 'custom_action' ) );
+        
     }
     public static function wp_init() {
         load_plugin_textdomain ( 'wpnotifyprice', null, 'wpnotifyprice/languages' );
@@ -78,7 +82,13 @@ class WPNotifyPrice_Plugin {
             array('jquery','popper_js'),
             '4.1.3',
             true);
-
+        
+        wp_enqueue_script( 'wpnotifyprice_js',
+            WPNOTIFYPRICE_PLUGIN_URL . '/js/wpnotifyprice-js.js',
+            array('jquery'),
+            microtime(),
+            true);
+        
         // Incluir Bootstrap CSS
         wp_enqueue_style( 'bootstrap_css',
             'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css',
@@ -137,6 +147,19 @@ class WPNotifyPrice_Plugin {
 	    if ( !empty( $queries ) ) {
 	        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 	        dbDelta( $queries );
+	    }
+	}
+	
+	public static function custom_action() {
+	    if (
+	       ! isset( $_POST['wpnotifyprice_nonce_field'] )
+	       || ! wp_verify_nonce( $_POST['wpnotifyprice_nonce_field'], 'custom_action_nonce')
+	    ) {
+	            
+	       exit('The form is not valid');
+	            
+	    } else {
+	        echo "Le avisaremos cuando baje el precio, muchas gracias por el interés.";
 	    }
 	}
 }

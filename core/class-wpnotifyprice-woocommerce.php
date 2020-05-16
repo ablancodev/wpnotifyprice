@@ -8,7 +8,7 @@ class ClassWPNotifyPrice_Woocommerce {
     public static function woocommerce_before_single_product_summary() {
         ?>
         <!-- Modal Starts -->
-        <div class="modal" id="bootstrapModal" role="dialog">
+        <div class="modal fade" id="bootstrapModal" role="dialog" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <!-- Modal Header -->
@@ -17,9 +17,11 @@ class ClassWPNotifyPrice_Woocommerce {
                     </div>
                     <!-- Modal Body -->
                     <div class="modal-body">
-                    	<form>
+                    	<form class="wordpress-ajax-form" method="post" action="<?php echo admin_url('admin-ajax.php'); ?>">
                     	<input type="text" placeholder="Su email" name="wpnotifyprice_email" />
                     	<input type="submit" value="Enviar" />
+                    	<input type="hidden" name="action" value="custom_action">
+						<?php wp_nonce_field( 'custom_action_nonce', 'wpnotifyprice_nonce_field' ); ?>
                     	</form>
                     </div>
                     <!-- Modal Footer -->
