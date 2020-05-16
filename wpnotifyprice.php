@@ -56,7 +56,8 @@ class WPNotifyPrice_Plugin {
     public static function wp_init() {
         load_plugin_textdomain ( 'wpnotifyprice', null, 'wpnotifyprice/languages' );
         
-        require_once 'core/class-wpnotifyprice-shortcode.php';
+        require_once 'core/class-wpnotifyprice-shortcodes.php';
+        require_once 'core/class-wpnotifyprice-woocommerce.php';
         
         // styles & javascript
         add_action ( 'wp_enqueue_scripts', array (
@@ -65,9 +66,26 @@ class WPNotifyPrice_Plugin {
         ) );
     }
     
-    
-    
     public static function wp_enqueue_scripts($page) {
+        // Incluir Bootstrap JS y dependencia popper
+        wp_enqueue_script( 'popper_js',
+            'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js',
+            array(),
+            '1.14.3',
+            true);
+        wp_enqueue_script( 'bootstrap_js',
+            'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js',
+            array('jquery','popper_js'),
+            '4.1.3',
+            true);
+
+        // Incluir Bootstrap CSS
+        wp_enqueue_style( 'bootstrap_css',
+            'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css',
+            array(),
+            '4.1.3'
+            );
+
         // css
         //wp_register_style ( 'wpnotifyprice-style', WPNOTIFYPRICE_PLUGIN_URL . '/css/wpnotifyprice-style.css', array (), '1.0.0' );
         //wp_enqueue_style ( 'wpnotifyprice-style' );

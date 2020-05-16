@@ -1,5 +1,5 @@
 <?php
-class ClassSmartRelatedProducts_Shortcodes {
+class ClassWPNotifyPrice_Shortcodes {
     
     public static function init() {
         add_shortcode( 'ads', array( __CLASS__, 'my_ads_shortcode' ) );
@@ -12,5 +12,5 @@ class ClassSmartRelatedProducts_Shortcodes {
         return ob_get_clean();
     }  
 }
-ClassSmartRelatedProducts_Shortcodes::init();
+ClassWPNotifyPrice_Shortcodes::init();
 ?>
