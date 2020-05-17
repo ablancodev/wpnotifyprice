@@ -18,7 +18,7 @@ class WPNotifyPrice {
                 $header[] = 'BCC: ' . $lead->email;
             }
             // Mandamos el email
-            @wp_mail( '', 'Bajada de precio', 'Tenemos buenas noticias.<br>El producto ha bajado de precio.', $header );
+            @wp_mail( '', 'Bajada de precio', 'Tenemos buenas noticias.<br><a href="' . get_the_permalink( $product_id ) . '">Tu  producto favorito</a> ha bajado de precio.', $header );
         }
     }
 }
