@@ -60,6 +60,7 @@ class WPNotifyPrice_Plugin {
     public static function wp_init() {
         load_plugin_textdomain ( 'wpnotifyprice', null, 'wpnotifyprice/languages' );
         
+        require_once 'core/class-wpnotifyprice.php';
         require_once 'core/class-wpnotifyprice-shortcodes.php';
         require_once 'core/class-wpnotifyprice-woocommerce.php';
         
@@ -157,6 +158,12 @@ class WPNotifyPrice_Plugin {
 	    ) {
 	       exit('The form is not valid');
 	    } else {
+	        // Recogemos datos y guardamos
+	        $email = sanitize_email( $_POST['email'] );
+	        $product_id = intval( $_POST['product_id'] );
+	        WPNotifyPrice::save_lead( $email, $product_id );
+	        
+	        
 	        echo "Le avisaremos cuando baje el precio, muchas gracias por el interés.";
 	        wp_die();
 	    }
