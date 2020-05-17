@@ -155,11 +155,10 @@ class WPNotifyPrice_Plugin {
 	       ! isset( $_POST['wpnotifyprice_nonce_field'] )
 	       || ! wp_verify_nonce( $_POST['wpnotifyprice_nonce_field'], 'custom_action_nonce')
 	    ) {
-	            
 	       exit('The form is not valid');
-	            
 	    } else {
 	        echo "Le avisaremos cuando baje el precio, muchas gracias por el interés.";
+	        wp_die();
 	    }
 	}
 }
