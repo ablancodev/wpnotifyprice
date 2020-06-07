@@ -2,14 +2,11 @@
 class ClassWPNotifyPrice_Shortcodes {
     
     public static function init() {
-        add_shortcode( 'ads', array( __CLASS__, 'my_ads_shortcode' ) );
+        add_shortcode( 'wpnotifyprice', array( __CLASS__, 'wpnotifyprice' ) );
     }
     
-    public static function my_ads_shortcode( $attr ) {
-                
-        ob_start();
-        get_template_part( 'ads' );
-        return ob_get_clean();
+    public static function wpnotifyprice( $attr ) {         
+        return WPNotifyPrice_Template::modal();
     }  
 }
 ClassWPNotifyPrice_Shortcodes::init();

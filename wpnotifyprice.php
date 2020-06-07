@@ -60,9 +60,13 @@ class WPNotifyPrice_Plugin {
     public static function wp_init() {
         load_plugin_textdomain ( 'wpnotifyprice', null, 'wpnotifyprice/languages' );
         
+        // Core
         require_once 'core/class-wpnotifyprice.php';
         require_once 'core/class-wpnotifyprice-shortcodes.php';
         require_once 'core/class-wpnotifyprice-woocommerce.php';
+        
+        // Template
+        require_once 'template/class-wpnotifyprice-template.php';
         
         // styles & javascript
         add_action ( 'wp_enqueue_scripts', array (
