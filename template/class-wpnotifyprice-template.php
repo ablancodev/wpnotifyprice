@@ -10,7 +10,7 @@ class WPNotifyPrice_Template {
                 <div class="modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header">
-                    	<h4 class="modal-title">Avísame si baja el precio</h4>
+                    	<h4 class="modal-title"><?php _e('Avísame si baja el precio', 'wpnotifyprice');?></h4>
                     </div>
                     <!-- Modal Body -->
                     <div class="modal-body">
@@ -32,7 +32,7 @@ class WPNotifyPrice_Template {
         <!-- Modal Ends -->
         
         <!-- Modal Trigger -->
-    	<button type="button" class="btn btn-info" data-toggle="modal" data-target="#bootstrapModal">Avísame si baja de precio</button>
+    	<button type="button" class="btn btn-info" data-toggle="modal" data-target="#bootstrapModal"><?php _e('Avísame si baja de precio','wpnotifyprice');?></button>
         <?php
         return ob_get_clean();
     }  

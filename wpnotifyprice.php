@@ -160,7 +160,7 @@ class WPNotifyPrice_Plugin {
 	       ! isset( $_POST['wpnotifyprice_nonce_field'] )
 	       || ! wp_verify_nonce( $_POST['wpnotifyprice_nonce_field'], 'custom_action_nonce')
 	    ) {
-	       exit('The form is not valid');
+	       exit(__('The form is not valid', 'wpnotifyprice'));
 	    } else {
 	        // Recogemos datos y guardamos
 	        $email = sanitize_email( $_POST['email'] );
@@ -168,7 +168,7 @@ class WPNotifyPrice_Plugin {
 	        WPNotifyPrice::save_lead( $email, $product_id );
 	        
 	        
-	        echo "Le avisaremos cuando baje el precio, muchas gracias por el interés.";
+	        echo __('Le avisaremos cuando baje el precio, muchas gracias por el interés.', 'wpnotifyprice');
 	        wp_die();
 	    }
 	}
