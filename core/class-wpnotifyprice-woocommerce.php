@@ -2,10 +2,12 @@
 class ClassWPNotifyPrice_Woocommerce {
     
     public static function init() {
-        // Mostramos el formulario y botón
-        add_action( 'woocommerce_before_single_product_summary',  array( __CLASS__, 'woocommerce_before_single_product_summary' ),  10 );
+        // Mostramos el formulario y botón en la ifcha de producto si tenemos la opción activada
+        if ( get_option('wc_settings_tab_wpnotifyprice_display', 'yes') == 'yes' ) {
+            add_action( 'woocommerce_before_single_product_summary',  array( __CLASS__, 'woocommerce_before_single_product_summary' ),  10 );
+        }
         
-        // Datectamos el cambio de precio
+        // Datectamos el cambio de precio, y si procede, mandamos emails.
         add_action( 'woocommerce_before_product_object_save', array( __CLASS__, 'woocommerce_product_object_updated_props' ), 10, 2 );
         
         // Creamos una sección de configuración (tab en Woocommerce)
@@ -57,26 +59,28 @@ class ClassWPNotifyPrice_Woocommerce {
     private static function getSettings() {
         $settings = array(
             'section_title' => array(
-                'name'     => __( 'Section Title', 'wpnotifyprice' ),
+                'name'     => __( 'Woocommerce Notify Price', 'wpnotifyprice' ),
                 'type'     => 'title',
                 'desc'     => '',
-                'id'       => 'wc_settings_tab_demo_section_title'
+                'id'       => 'wc_settings_tab_wpnotifyprice_section_title'
             ),
-            'title' => array(
-                'name' => __( 'Title', 'wpnotifyprice' ),
-                'type' => 'text',
-                'desc' => __( 'This is some helper text', 'woocommerce-settings-tab-demo' ),
-                'id'   => 'wc_settings_tab_demo_title'
+            'display' => array(
+                'name'    => __( 'Display on product page', 'wpnotifyprice' ),
+                'type'    => 'checkbox',
+                'desc'    => __( 'Display the button on the product page.', 'woocommerce-settings-tab-demo' ),
+                'id'      => 'wc_settings_tab_wpnotifyprice_display',
+                'std'     => 'yes', // WooCommerce < 2.0
+                'default' => 'yes' // WooCommerce >= 2.0
             ),
-            'description' => array(
-                'name' => __( 'Description', 'wpnotifyprice' ),
-                'type' => 'textarea',
-                'desc' => __( 'This is a paragraph describing the setting. Lorem ipsum yadda yadda yadda. Lorem ipsum yadda yadda yadda. Lorem ipsum yadda yadda yadda. Lorem ipsum yadda yadda yadda.', 'woocommerce-settings-tab-demo' ),
-                'id'   => 'wc_settings_tab_demo_description'
+            'shortcode' => array(
+                'name'    => __( 'Shortcode', 'wpnotifyprice' ),
+                'type'    => 'title',
+                'desc'    => __( 'You can use the shortcode: [wpnotifyprice] where you can display que button.', 'woocommerce-settings-tab-demo' ),
+                'id'      => 'wc_settings_tab_wpnotifyprice_shortcode_text'
             ),
             'section_end' => array(
                 'type' => 'sectionend',
-                'id' => 'wc_settings_tab_demo_section_end'
+                'id' => 'wc_settings_tab_wpnotifyprice_section_end'
             )
         );
         return apply_filters( 'wc_settings_tab_wpnotifyprice_settings', $settings );

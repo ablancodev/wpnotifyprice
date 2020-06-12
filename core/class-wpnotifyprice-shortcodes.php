@@ -5,7 +5,7 @@ class ClassWPNotifyPrice_Shortcodes {
         add_shortcode( 'wpnotifyprice', array( __CLASS__, 'wpnotifyprice' ) );
     }
     
-    public static function wpnotifyprice( $attr ) {         
+    public static function wpnotifyprice( $attr ) {   
         return WPNotifyPrice_Template::modal();
     }  
 }

@@ -56,6 +56,9 @@ class WPNotifyPrice_Plugin {
         add_action( 'wp_ajax_custom_action', array( __CLASS__, 'custom_action' ) );
         add_action( 'wp_ajax_nopriv_custom_action', array( __CLASS__, 'custom_action' ) );
         
+        // Settings link on the plugins lists
+        add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), array( __CLASS__, 'plugin_action_links' ) );
+        
     }
     public static function wp_init() {
         load_plugin_textdomain ( 'wpnotifyprice', null, 'wpnotifyprice/languages' );
@@ -116,6 +119,14 @@ class WPNotifyPrice_Plugin {
         }
     }   
     
+    /* 
+     * On plugins list screen, add the Settings link.
+     */
+    public static function plugin_action_links( $links ) {
+        $links[] = '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=settings_tab_wpnotifyprice' ) . '">Settings</a>';
+        return $links;
+    }
+
 	/**
 	 * Plugin activation work.
 	 *
