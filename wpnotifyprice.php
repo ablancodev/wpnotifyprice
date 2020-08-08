@@ -18,10 +18,10 @@
  * @package wpnotifyprice
  * @since wpnotifyprice 1.0.0
  *
- * Plugin Name: WPNotifyPrice
+ * Plugin Name: Woocommerce Notify Price
  * Plugin URI: http://www.eggemplo.com
  * Description: 
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author: eggemplo
  * Author URI: http://www.ablancodev.com
  * Text Domain: wpnotifyprice
@@ -179,7 +179,7 @@ class WPNotifyPrice_Plugin {
 	        WPNotifyPrice::save_lead( $email, $product_id );
 	        
 	        
-	        echo __('Le avisaremos cuando baje el precio, muchas gracias por el interés.', 'wpnotifyprice');
+	        echo __('We will let you know when the price drops, thank you very much for your interest.', 'wpnotifyprice');
 	        wp_die();
 	    }
 	}

@@ -17,8 +17,12 @@ class WPNotifyPrice {
             foreach ( $leads as $lead ) {
                 $header[] = 'BCC: ' . $lead->email;
             }
+            
+            $subject = get_option('wc_settings_tab_wpnotifyprice_subject', __('The price has dropped !!', 'wpnotifyprice'));
+            $message = get_option('wc_settings_tab_wpnotifyprice_message', __('We have good news!<br> The price of [product_link] has dropped. Get it !!', 'wpnotifyprice'));
+            
             // Mandamos el email
-            @wp_mail( '', 'Bajada de precio', 'Tenemos buenas noticias.<br><a href="' . get_the_permalink( $product_id ) . '">Tu  producto favorito</a> ha bajado de precio.', $header );
+            @wp_mail( '', $subject, $message, $header );
         }
     }
 }

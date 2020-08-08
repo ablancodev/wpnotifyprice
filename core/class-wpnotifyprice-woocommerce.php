@@ -45,7 +45,7 @@ class ClassWPNotifyPrice_Woocommerce {
     
     /* Settings */
     public static function woocommerce_settings_tabs_array( $settings_tabs ) {
-        $settings_tabs['settings_tab_wpnotifyprice'] = __( 'WP Notify Price', 'wpnotifyprice' );
+        $settings_tabs['settings_tab_wpnotifyprice'] = __( 'Notify Price', 'wpnotifyprice' );
         return $settings_tabs;
     }
     
@@ -67,15 +67,31 @@ class ClassWPNotifyPrice_Woocommerce {
             'display' => array(
                 'name'    => __( 'Display on product page', 'wpnotifyprice' ),
                 'type'    => 'checkbox',
-                'desc'    => __( 'Display the button on the product page.', 'woocommerce-settings-tab-demo' ),
+                'desc'    => __( 'Display the button on the product page.', 'wpnotifyprice' ),
                 'id'      => 'wc_settings_tab_wpnotifyprice_display',
                 'std'     => 'yes', // WooCommerce < 2.0
                 'default' => 'yes' // WooCommerce >= 2.0
             ),
+            'subject' => array(
+                'name'    => __( 'Email subject', 'wpnotifyprice' ),
+                'type'    => 'text',
+                'desc'    => __( 'Subject of the email sent to the user. You can use [product_name]', 'wpnotifyprice' ),
+                'id'      => 'wc_settings_tab_wpnotifyprice_subject',
+                'std'     => __('The price has dropped !!', 'wpnotifyprice'), // WooCommerce < 2.0
+                'default' => __('The price has dropped !!', 'wpnotifyprice') // WooCommerce >= 2.0
+            ),
+            'message' => array(
+                'name'    => __( 'Email message', 'wpnotifyprice' ),
+                'type'    => 'textarea',
+                'desc'    => __( 'Message of the email sent to the user. You can use [product_name] and [product_link]', 'wpnotifyprice' ),
+                'id'      => 'wc_settings_tab_wpnotifyprice_message',
+                'std'     => __('We have good news!<br> The price of [product_link] has dropped. Get it !!', 'wpnotifyprice'), // WooCommerce < 2.0
+                'default' => __('We have good news!<br> The price of [product_link] has dropped. Get it !!', 'wpnotifyprice') // WooCommerce >= 2.0
+            ),
             'shortcode' => array(
                 'name'    => __( 'Shortcode', 'wpnotifyprice' ),
                 'type'    => 'title',
-                'desc'    => __( 'You can use the shortcode: [wpnotifyprice] where you can display que button.', 'woocommerce-settings-tab-demo' ),
+                'desc'    => __( 'You have available the shortcode: [woonotifyprice_button] to display the button.', 'wpnotifyprice' ),
                 'id'      => 'wc_settings_tab_wpnotifyprice_shortcode_text'
             ),
             'section_end' => array(
